@@ -20,7 +20,7 @@
 // To declare the structure of the exercises
 static Exercise exercise_list[MAX_EXERCISES];
 int exercise_list_size = 0;
-
+ 
 
 /*
     description : read the information in "excercises.txt"
@@ -33,8 +33,9 @@ void loadExercises(const char* EXERCISEFILEPATH) {
         return;
     }
 
-    // ToCode: to read a list of the exercises from the given file
-    while ( ) {
+    //파일로부터 운동 목록 불러오기 
+    while (fscanf(file, "%s %d", exercise_list[exercise_list_size].exercise_name, &exercise_list[exercise_list_size].calories_burned_per_minute) == 2) {
+    	exercise_list_size++;
     	
         if (exercise_list_size >= MAX_EXERCISES){
         	break;
@@ -62,15 +63,32 @@ void inputExercise(HealthData* health_data) {
     printf("The list of exercises: \n");
 
 
-    // ToCode: to enter the exercise to be chosen with exit option
-
- 
+    //운동 옵션 출력 (%s:운동이름, %d:소모된 칼로리) 
+  for(i=0;i<exercise_list_size;i++){
+    printf("%d. Exercise: %s, Calories burned: %dkcal\n", i+1, exercise_list[i].exercise_name, exercise_list[i].calories_burned_per_minute);
+	}
     
-    // To enter the duration of the exercise
-    printf("Enter the duration of the exercise (in min.): ");
-    scanf("%d", &duration);
 
+    //원하는 운동 번호 입력하기 
+    printf("Select the Exercise you want: ");  
+	scanf("%d", &choice);
+
+    //번호 0 입력하면 끝내기  
+    if(choice == 0){
+    	printf("End of exercise selection.\n");
+    	return;
+    }
+    //번호가 1보다 작거나 최대 번호보다 크게 입력하면 다시 입력하기
+    if(choice < 1 || choice > exercise_list_size){
+        printf("Invalid choice. Try again.\n");
+		return;
+	}
+    //번호 올바르게 입력시 운동할 시간 입력하기  
+    	else if ( 1 <= choice && choice < exercise_list_size){
+    	printf("Enter the duration of the exercise: ");
+    	scanf("%d", &duration);
+    }
     // ToCode: to enter the selected exercise and total calcories burned in the health data
     
 
-}
+
