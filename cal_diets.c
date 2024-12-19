@@ -98,10 +98,9 @@ void inputDiet(HealthData* health_data) {
    
     health_data->diet_count++;	
 	
-    //누적된 선택한 식단 및 칼로리 전부 출력
-	 
-    for(j=0; j< health_data->diet_count; j++)
-    printf("Food: %s, Calories intake: %dkcal\n", health_data->diet.food_name[j], health_data->diet.total_calories_intake);
+    //출력
+	pritnf("You consumed %d calories by %s.\n", total_calories_intake, diet_list[choice - 1].food_name, intake);
+	
     
 
 

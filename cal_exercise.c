@@ -108,6 +108,7 @@ void inputExercise(HealthData* health_data) {
    
     health_data->exercise_count++;	
 	
-	//현재까지 진행한 운동 및 칼로리 출력 
-    for(j=0; j<health_data->exercise_count; j++)
-    printf("Exercise: %s, Calories burned: %dkcal\n", health_data->exercises.exercise_name[j], health_data->exercises.total_calories_burned
+	// 출력 
+	pritnf("You burned %d calories by %s for %d minutes.\n", total_calories_burned  exercise_list[choice - 1].exercise_name[j], duration);
+	
+   
