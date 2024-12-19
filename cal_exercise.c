@@ -90,24 +90,24 @@ void inputExercise(HealthData* health_data) {
     
 
     //운동한 시간에 따른 칼로리 소모 계산하기
-	 int total_calories_burned;
+	// int total_calories_burned;
 	 total_calories_burned = exercise_list[choice - 1].calories_burned_per_minute * duration;
 	 
     //선택한 운동과 칼로리 health data에 저장하기 (exercise count로 누적함) 
     //선택한 운동 저장하기, 선택한 운동 count로 누적 
     int j;
 	for(j=0;exercise_list[choice - 1].exercise_name[j] != '\0'; j++) {
-		health_data->selected_exercise[health_data->exercise_count].exercise_name[j] = exercise_list[choice - 1].exercise_name[j];
+		health_data->exercises[health_data->exercise_count].exercise_name[j] = exercise_list[choice - 1].exercise_name[j];
 	}
 	//문자열 정상적으로 출력되기 위해 null 함수 추가하기 
-	health_data->selected_exercise[health_data->exercise_count].exercise_name[j] = '\0';
+	health_data->exercises[health_data->exercise_count].exercise_name[j] = '\0';
 	
 	//선택한 운동의 칼로리 저장하기, 칼로리 누적하기  
-	health_data->selected_exercise.calories_burned_per_minute = exercise_list[choice - 1].calories_burned_per_minute;
+	health_data->exercises.calories_burned_per_minute = exercise_list[choice - 1].calories_burned_per_minute;
 	health_data->total_calories_burned = total_calories_burned;
    
     health_data->exercise_count++;	
 	
 	//현재까지 진행한 운동 및 칼로리 출력 
     for(j=0; j<health_data->exercise_count; j++)
-    printf("Exercise: %s, Calories burned: %dkcal\n", health_data->selected_exercise.exercise_name[j], health_data->selected_exercise.total_calories_burned
+    printf("Exercise: %s, Calories burned: %dkcal\n", health_data->exercises.exercise_name[j], health_data->exercises.total_calories_burned

@@ -72,18 +72,37 @@ void inputDiet(HealthData* health_data) {
     	printf("End of diet selection.\n");
     	return;
 }
-    //입력한 번호가 0보다 작거나 식단 목록개수보다 크면 다시 입력하라고 하기 
-    if(choice < 0 || choice > diet_list_size){
+    //입력한 번호가 1보다 작거나  식단 목록개수보다 크면 다시 입력하라고 하기 
+    if(choice < 1 || choice > diet_list_size){
         printf("Invalid coice. Try again.\n");
 		return; 
 }
-    //입력한 번호가 0보다 크면  선택된 식단,칼로리 출력되고 health data에 저장됨 (아래코드 작성) 
+    //존재하는 번호 입력시 선택된 식단,칼로리 출력되고 health data에 저장됨 
+    else if (1 <= choice && choice <= diet_list_size){
+    
+    //총 칼로리 정의 
+    total_calories_intake = diet_list[choice - 1].calories_intake;
+    
+    
+	int j;
+	for(j=0;diet_list[choice - 1].food_name[j] != '\0'; j++) {
+	health_data->diet[health_data->diet_count].food_name[j] = diet_list[choice - 1].food_name[j];
+	}
+	
+	//문자열 정상적으로 출력되기 위해(끝) null 함수 추가하기 
+	health_data->diet[health_data->diet_count].food_name[j] = '\0';
+	
+	//선택한 식단의 칼로리 저장하기, 칼로리 누적하기  
+	health_data->diet[health_data->diet_count].calories_intake = diet_list[choice - 1].calories_intake;
+	health_data->total_calories_intake = total_calories_intake;
    
-    // ToCode: to enter the selected diet in the health data
+    health_data->diet_count++;	
+	
+    //누적된 선택한 식단 및 칼로리 전부 출력
+	 
+    for(j=0; j< health_data->diet_count; j++)
+    printf("Food: %s, Calories intake: %dkcal\n", health_data->diet.food_name[j], health_data->diet.total_calories_intake);
     
-    
-    
-    // ToCode: to enter the total calories intake in the health data
 
 
 }
