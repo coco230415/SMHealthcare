@@ -34,7 +34,7 @@ void loadDiets(const char* DIETFILEPATH) {
     }
 
      //파일로부터 다이어트 식단 목록 읽어와 저장  
-    while (fscanf(file, "%s %d", diet_list[diet_list_size].food_name, &diet_list[diet_list_size].calories_intake) == 2)                     ) {
+    while (fscanf(file, "%s %d", diet_list[diet_list_size].food_name, &diet_list[diet_list_size].calories_intake) == 2) {
     	diet_list_size++; 
     	
         if (diet_list_size >= MAX_DIETS){
@@ -55,7 +55,7 @@ void loadDiets(const char* DIETFILEPATH) {
 
 void inputDiet(HealthData* health_data) {
     int choice, i;
-    
+    int total_calories_intake;
     //선택된 diet 목록 출력  
     printf("The list of diets:\n");
    
@@ -78,7 +78,7 @@ void inputDiet(HealthData* health_data) {
 		return; 
 }
     //존재하는 번호 입력시 선택된 식단,칼로리 출력되고 health data에 저장됨 
-    else if (1 <= choice && choice <= diet_list_size){
+    else if (1 <= choice && choice <= diet_list_size) {
     
     //총 칼로리 정의 
     total_calories_intake = diet_list[choice - 1].calories_intake;
@@ -99,10 +99,11 @@ void inputDiet(HealthData* health_data) {
     health_data->diet_count++;	
 	
     //출력
-	pritnf("You consumed %d calories by %s.\n", total_calories_intake, diet_list[choice - 1].food_name, intake);
-	
+	printf("You consumed %d calories by %s.\n", total_calories_intake, diet_list[choice - 1].food_name);
+}
+}
     
 
 
-}
+
 

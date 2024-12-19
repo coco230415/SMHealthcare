@@ -84,14 +84,13 @@ void inputExercise(HealthData* health_data) {
 		return;
 	}
     //번호 올바르게 입력시 운동할 시간 입력하기  &  health_data에 데이터 저장 및 누적 
-    	else if ( 1 <= choice && choice <= exercise_list_size){
     	printf("Enter the duration of the exercise(in minutes): ");
     	scanf("%d", &duration);
     
 
     //운동한 시간에 따른 칼로리 소모 계산하기
-	// int total_calories_burned;
-	 total_calories_burned = exercise_list[choice - 1].calories_burned_per_minute * duration;
+	int total_calories_burned;
+	total_calories_burned = exercise_list[choice - 1].calories_burned_per_minute * duration;
 	 
     //선택한 운동과 칼로리 health data에 저장하기 (exercise count로 누적함) 
     //선택한 운동 저장하기, 선택한 운동 count로 누적 
@@ -103,12 +102,11 @@ void inputExercise(HealthData* health_data) {
 	health_data->exercises[health_data->exercise_count].exercise_name[j] = '\0';
 	
 	//선택한 운동의 칼로리 저장하기, 칼로리 누적하기  
-	health_data->exercises.calories_burned_per_minute = exercise_list[choice - 1].calories_burned_per_minute;
+	health_data->exercises[health_data->exercise_count].calories_burned_per_minute = exercise_list[choice - 1].calories_burned_per_minute;
 	health_data->total_calories_burned = total_calories_burned;
    
     health_data->exercise_count++;	
 	
 	// 출력 
-	pritnf("You burned %d calories by %s for %d minutes.\n", total_calories_burned  exercise_list[choice - 1].exercise_name, duration);
-	
-   
+	printf("You burned %d calories by eating %s for %d minutes.\n", total_calories_burned, exercise_list[choice - 1].exercise_name, duration);
+}
