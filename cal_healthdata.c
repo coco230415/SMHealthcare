@@ -61,7 +61,7 @@ void saveData(const char* HEALTHFILEPATH, const HealthData* health_data) {
     fprintf(file, "Basal Metabolic Rate: %d kcal\n", 1300);
     fprintf(file, "Total calories burned: %d kcal\n", health_data->total_calories_burned);
     fprintf(file, "Total calories intake: %d kcal\n", health_data->total_calories_intake);
-    fprintf(file, "The remaing Calories: %d kcal\n", remaining_calories);
+    fprintf(file, "The remaing calories: %d kcal\n", remaining_calories);
     
     fclose(file);   
 }
@@ -81,21 +81,29 @@ void printHealthData(const HealthData* health_data) {
 	
 	// ToCode: to print out the saved history of exercises
 	printf("=========================== History of Exercise =======================\n");
-  
-  
+    for(i=0; i<health_data->exercise_count; i++){
+        printf("Exercise: %s, Calories burned per minute: %d kcal\n",  
+     	health_data->exercises[i].exercise_name, health_data->exercises[i].calories_burned_per_minute); 
+    }
     printf("=======================================================================\n");
+
 
     // ToCode: to print out the saved history of diets
     printf("============================= History of Diet =========================\n");
-
-
+    for(i=0; i< health_data->diet_count; i++){
+        printf("Food: %s, Calories intake: %d kcal\n", 
+		health_data->diet[i].food_name, health_data->diet[i].calories_intake);
+    }
     printf("=======================================================================\n");
 
 
 	// ToCode: to print out the saved history of calories including basal metabolic rate, 
 	// total calories burned, total calories intake, and the remaining calories
 	printf("============================== Total Calories =========================\n");
- 
+    printf("Basal Metabolic Rate: %d kcal\n", 1300);
+    printf("Total calories burned: %d kcal\n", health_data->total_calories_burned);
+    printf("Total calories intake: %d kcal\n", health_data->total_calories_intake);
+    printf("The remaing calories: %d kcal\n", remaining_calories);
  
     printf("=======================================================================\n \n");
     
@@ -103,8 +111,7 @@ void printHealthData(const HealthData* health_data) {
     // 사용자에게 추천 사항 제공 (남은 칼로리 0인 경우, <0인 경우, >0 인 경우) 
 	if(remaining_calories == 0){
     	printf("You have consumed all your calories for today!\n");
-	}  
-	else if(remaining_calories < 0){
+	}else if(remaining_calories < 0){
         printf("[Warning] Too few calories!\n");
         if(health_data->total_calories_intake == DAILY_CALORIE_GOAL){
             printf("Your total calorie intake for today has reached your goal!\n");
@@ -118,7 +125,7 @@ void printHealthData(const HealthData* health_data) {
         printf("Please exercise for your health!\n");
         if (health_data->total_calories_intake == DAILY_CALORIE_GOAL) {
             printf("Your total calorie intake for today has reached your goal!\n");  
-        }   else if(health_data->total_calories_intake < DAILY_CALORIE_GOAL){
+        }else if(health_data->total_calories_intake < DAILY_CALORIE_GOAL){
         	printf("Your total calorie intake for today has not reached your goal, remember to eat more!!\n");
         }
     }
