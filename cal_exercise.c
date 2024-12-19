@@ -95,7 +95,8 @@ void inputExercise(HealthData* health_data) {
 	 
     //선택한 운동과 칼로리 health data에 저장하기 (exercise count로 누적함) 
     //선택한 운동 저장하기, 선택한 운동 count로 누적 
-	for(int j=0;exercise_list[choice - 1].exercise_name[j] != '\0'; j++) {
+    int j;
+	for(j=0;exercise_list[choice - 1].exercise_name[j] != '\0'; j++) {
 		health_data->selected_exercise[health_data->exercise_count].exercise_name[j] = exercise_list[choice - 1].exercise_name[j];
 	}
 	//문자열 정상적으로 출력되기 위해 null 함수 추가하기 
