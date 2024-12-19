@@ -109,6 +109,6 @@ void inputExercise(HealthData* health_data) {
     health_data->exercise_count++;	
 	
 	// Ãâ·Â 
-	pritnf("You burned %d calories by %s for %d minutes.\n", total_calories_burned  exercise_list[choice - 1].exercise_name[j], duration);
+	pritnf("You burned %d calories by %s for %d minutes.\n", total_calories_burned  exercise_list[choice - 1].exercise_name, duration);
 	
    
