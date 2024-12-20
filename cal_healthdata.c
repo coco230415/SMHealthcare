@@ -36,7 +36,8 @@ void saveData(const char* HEALTHFILEPATH, const HealthData* health_data) {
     //선택한 운동과 소모한 누적 칼로리 저장 
     fprintf(file, "[Exercises] \n");
     for(i=0; i<health_data->exercise_count; i++){
-    	fprintf(file, "Exercise: %s, Calories burned per minute: %d kcal\n", health_data->exercises[i].exercise_name, health_data->exercises[i].calories_burned_per_minute);
+    	fprintf(file, "Exercise: %s, Calories burned per minute: %d kcal\n", //%s에는 health_data에 저장된 운동 목록들,%d에는 분당 소모된 칼로리량 
+		health_data->exercises[i].exercise_name, health_data->exercises[i].calories_burned_per_minute); 
 }
     //총 소모한 운동 칼로리 출력 
         fprintf(file, "Total calories burned: %d kcal\n", health_data->total_calories_burned);
@@ -46,18 +47,18 @@ void saveData(const char* HEALTHFILEPATH, const HealthData* health_data) {
     //선택한 식단과 섭취한 칼로리  
 	fprintf(file, "\n[Diets] \n");
     
-	for(i=0; i< health_data->diet_count; i++){
+	for(i=0; i< health_data->diet_count; i++){ //식단 옵션 누를때마다 health_data에 저장된 것 전부 출력하기 위해 for문 사용 
         fprintf(file, "Food: %s, Calories intake: %d kcal\n", 
 		health_data->diet[i].food_name, health_data->diet[i].calories_intake);
 	}
-    // 총 섭취한 식단 칼로리 출력 
+    // 총 섭취한 식단 칼로리 출력 (health_data에 저장된 총 섭취한 칼로리) 
 	    fprintf(file, "Total calories intake: %d kcal\n", health_data->total_calories_intake);
     
 
     // ToCode: to save the total remaining calrories
     //남은 칼로리  (섭취 칼로리-기초대사량-소모된 칼로리) 
     int remaining_calories;
-    int Basal_Metabolic_Rate;
+    int Basal_Metabolic_Rate; //기초 대사량 
     
     fprintf(file, "\n[Total] \n");
     remaining_calories = (health_data->total_calories_intake) - Basal_Metabolic_Rate - (health_data->total_calories_burned);
@@ -82,6 +83,7 @@ void saveData(const char* HEALTHFILEPATH, const HealthData* health_data) {
 void printHealthData(const HealthData* health_data) {
 	int i;
 	int remaining_calories;
+	
 	// ToCode: to print out the saved history of exercises
 	printf("=========================== History of Exercise =======================\n");
     for(i=0; i<health_data->exercise_count; i++){
